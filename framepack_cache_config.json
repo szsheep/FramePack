@@ -3,9 +3,9 @@
     "hf_cache_dir": "./hf_download",
     "model_cache_dir": "./models",
     "temp_cache_dir": "./temp",
-    "max_cache_size_gb": 100,
+    "max_cache_size_gb": 75,
     "auto_cleanup": true,
-    "cleanup_threshold_gb": 80
+    "cleanup_threshold_gb": 60
   },
   "teacache": {
     "enabled": true,
@@ -19,19 +19,17 @@
     ]
   },
   "localization": {
-    "language": "zh",
-    "region": "CN",
+    "language": "ja",
+    "region": "JP",
     "use_system_locale": false
   },
   "storage": {
     "prefer_local_storage": true,
     "local_storage_priority": [
       "ssd",
-      "hdd"
+      "hdd",
+      "network"
     ],
-    "backup_locations": [
-      "/data/framepack_cache",
-      "~/Documents/FramePack/cache"
-    ]
+    "backup_locations": []
   }
 }
