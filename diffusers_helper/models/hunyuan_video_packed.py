@@ -819,15 +819,24 @@ class HunyuanVideoTransformer3DModelPacked(ModelMixin, ConfigMixin, PeftAdapterM
         self.use_gradient_checkpointing = False
         print('self.use_gradient_checkpointing = False')
 
-    def initialize_teacache(self, enable_teacache=True, num_steps=25, rel_l1_thresh=0.15):
-        self.enable_teacache = enable_teacache
+    def initialize_teacache(self, enable_teacache=True, num_steps=25, rel_l1_thresh=None, rescale_coefficients=None):
+        # Import here to avoid circular imports
+        from ..cache_config import get_cache_config
+        
+        config = get_cache_config()
+        teacache_config = config.get_teacache_config()
+        
+        self.enable_teacache = enable_teacache if enable_teacache is not None else teacache_config['enabled']
         self.cnt = 0
         self.num_steps = num_steps
-        self.rel_l1_thresh = rel_l1_thresh  # 0.1 for 1.6x speedup, 0.15 for 2.1x speedup
+        self.rel_l1_thresh = rel_l1_thresh if rel_l1_thresh is not None else teacache_config['rel_l1_thresh']
         self.accumulated_rel_l1_distance = 0
         self.previous_modulated_input = None
         self.previous_residual = None
-        self.teacache_rescale_func = np.poly1d([7.33226126e+02, -4.01131952e+02, 6.75869174e+01, -3.14987800e+00, 9.61237896e-02])
+        
+        # Use configurable rescale coefficients
+        coefficients = rescale_coefficients if rescale_coefficients is not None else teacache_config['rescale_coefficients']
+        self.teacache_rescale_func = np.poly1d(coefficients)
 
     def gradient_checkpointing_method(self, block, *args):
         if self.use_gradient_checkpointing:

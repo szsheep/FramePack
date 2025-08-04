@@ -1,0 +1,31 @@
+{
+  "cache": {
+    "hf_cache_dir": "./hf_download",
+    "model_cache_dir": "./models", 
+    "temp_cache_dir": "./temp",
+    "max_cache_size_gb": 75,
+    "auto_cleanup": true,
+    "cleanup_threshold_gb": 60
+  },
+  "teacache": {
+    "enabled": true,
+    "rel_l1_thresh": 0.18,
+    "rescale_coefficients": [
+      732.3226126,
+      -401.131952,
+      67.5869174,
+      -3.14987800,
+      0.0961237896
+    ]
+  },
+  "localization": {
+    "language": "ja",
+    "region": "JP",
+    "use_system_locale": false
+  },
+  "storage": {
+    "prefer_local_storage": true,
+    "local_storage_priority": ["ssd", "hdd", "network"],
+    "backup_locations": []
+  }
+}

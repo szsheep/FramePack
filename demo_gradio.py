@@ -1,8 +1,12 @@
 from diffusers_helper.hf_login import login
+from diffusers_helper.cache_config import get_cache_config
 
 import os
 
-os.environ['HF_HOME'] = os.path.abspath(os.path.realpath(os.path.join(os.path.dirname(__file__), './hf_download')))
+# Initialize cache configuration and set HF_HOME
+cache_config = get_cache_config()
+cache_config.ensure_cache_directories()
+os.environ['HF_HOME'] = cache_config.get_hf_cache_dir()
 
 import gradio as gr
 import torch

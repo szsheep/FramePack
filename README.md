@@ -477,6 +477,34 @@ You can also write prompts yourself. Concise prompts are usually preferred, for 
 
 and so on.
 
+# Cache Configuration
+
+FramePack now supports customizable cache configuration for optimal performance and localized storage. You can configure:
+
+- Custom cache directories and storage locations
+- TeaCache parameters for performance tuning
+- Localized storage based on your region
+- Automatic cache cleanup and size management
+
+## Quick Configuration
+
+Use the built-in configuration utility:
+
+```bash
+# Show current configuration
+python configure_cache.py --show
+
+# Set custom cache directory
+python configure_cache.py --set-cache-dir /path/to/cache
+
+# Load locale-specific settings
+python configure_cache.py --load-template zh_CN  # Chinese
+python configure_cache.py --load-template ja_JP  # Japanese
+python configure_cache.py --load-template en_US  # English
+```
+
+For detailed configuration options, see [Cache Configuration Guide](docs/CACHE_CONFIGURATION.md).
+
 # Cite
 
     @article{zhang2025framepack,
